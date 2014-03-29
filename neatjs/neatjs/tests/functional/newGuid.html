@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>neat.newGuid() Functional Test</title>
+</head>
+<body>
+    <div id="output"></div>
+    <script src="../../src/neat.js"></script>
+    <script>
+        (function () {
+            var newGuid = neat.newGuid();
+            document.getElementById('output').innerHTML = newGuid;
+        })();
+    </script>
+</body>
+</html>
