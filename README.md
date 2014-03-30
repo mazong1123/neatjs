@@ -3,6 +3,12 @@ neatjs
 
 A collection of useful JavaScript functions. Just simple and useful.
 
+Installation
+=======
+
+Just add the refernce in your HTML file:<br/>
+<script src="neat.js"></script>
+
 Example
 =======
 <p>
