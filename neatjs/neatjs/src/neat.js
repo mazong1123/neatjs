@@ -1,4 +1,14 @@
-﻿var neat = null;
+﻿/*
+    neatjs version 1.0.0
+    Author: Jim Ma. 
+    Email: mazong1123@gmail.com
+    Blog: http://mazong1123.wordpress.com
+    Github: https://github.com/mazong1123/neatjs
+
+    This software is under MIT licence.
+*/
+
+var neat = null;
 
 (function () {
     'use strict';
