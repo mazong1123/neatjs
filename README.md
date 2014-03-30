@@ -6,7 +6,7 @@ A collection of useful JavaScript functions. Just simple and useful.
 Installation
 =======
 
-Just add the refernce in your HTML file:<br/>
+Just add the reference in your HTML file:<br/>
 &lt;script src="neat.js"&gt;&lt;/script&gt;
 
 Example
