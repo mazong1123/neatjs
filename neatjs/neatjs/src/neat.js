@@ -1,11 +1,18 @@
-﻿(function () {
+﻿var neat = null;
+
+(function () {
+    'use strict';
+
     neat = {
+        /**
+        * Version number.
+        */
+        version: '1.0.0',
+
         /**
          * Create a random Guid.
          * 
          * @return {String} a random guid value.
-         * 
-         * @version 1.0
          */
         newGuid: function () {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,
@@ -22,8 +29,6 @@
          * 
          * @param {String} value - a hex value
          * @return {String} a rgb value.
-         * 
-         * @version 1.0
          */
         hexToRgb: function (value) {
             if (value.indexOf('#') != -1) {
@@ -43,8 +48,6 @@
          * @param {String} name - the name of the query parameter to retrieve.
          * @param {String} url - url to extract the query parameter.
          * @return {String} the value of the specific query parameter.
-         * 
-         * @version 1.0
          */
         getUrlParameterByName: function (name, url) {
             name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -65,8 +68,6 @@
         * @param {Array} arr1 - First array to compare.
         * @param {Array} arr2 - Second array to compare.
         * @return {Boolean} - true if two arrays equal. Otherwise false.
-        * 
-        * @version 1.0
         */
         isArrayEqual: function (arr1, arr2) {
             if ($(arr1).not(arr2).length == 0 && $(arr2).not(arr1).length == 0) {
@@ -81,8 +82,6 @@
          * 
          * @param {Object} object - an object to clone.
          * @return {Object} a cloned object.
-         *
-         * @version 1.0
          */
         cloneObject: function (object) {
             return $.extend(true, {}, object);
@@ -93,8 +92,6 @@
          * 
          * @param {Array} array - an array to clone.
          * @return {Array} a cloned array.
-         *
-         * @version 1.0
          */
         cloneArray: function (array) {
             var cloneArray = new Array();
@@ -112,16 +109,15 @@
         * 
         * @param {String} key - the key for the item to store.
         * @param {String} value - the value of the item to store.
-        *
-        * @version 1.0
         */
         setItemToStorage: function (key, value) {
+            var self = this;
             key = 'custom_' + key;
-            if (HeapUtility.localStorageSupported()) {
+            if (self.localStorageSupported()) {
                 localStorage.setItem(key, value);
             }
             else {
-                HeapUtility.setCookie(key, value, 3600);
+                self.setCookie(key, value, 3600);
             }
         },
 
@@ -131,14 +127,13 @@
         * 
         * @param {String} key - the key of the item.
         * @return {String} the value of the item.
-        *
-        * @version 1.0
         */
         getItemFromStorage: function (key) {
+            var self = this;
             var value = undefined;
             key = 'custom_' + key;
 
-            if (HeapUtility.localStorageSupported()) {
+            if (self.localStorageSupported()) {
                 // If localStorage supported, get the item from it.
                 value = localStorage.getItem(key);
             }
@@ -146,7 +141,7 @@
             if (value == undefined) {
                 // If localStorage is not supported or empty value found in the localStorage, try to get the
                 // value from cookie.
-                value = HeapUtility.getCookie(key);
+                value = self.getCookie(key);
             }
 
             return value;
@@ -156,20 +151,19 @@
         * Remove specific item from the browser storage. 
         * 
         * @param {String} key - the key for the item.
-        *
-        * @version 1.0
         */
         removeItemFromStorage: function (key) {
+            var self = this;
             key = 'custom_' + key;
 
-            if (HeapUtility.localStorageSupported()) {
+            if (self.localStorageSupported()) {
                 // If localStorage supported.
                 localStorage.removeItem(key);
 
                 return;
             }
 
-            HeapUtility.delCookie(key);
+            self.delCookie(key);
         },
 
         /**
@@ -178,8 +172,6 @@
         * @param {String} c_name - the key for the item to store.
         * @param {String} value - the value of the item to store.
         * @param {String} exdays - the expire days of the item.
-        *
-        * @version 1.0
         */
         setCookie: function (c_name, value, exdays) {
             var exdate = new Date();
@@ -193,8 +185,6 @@
         * 
         * @param {String} c_name - the key of the item.
         * @return {String} the value of the item.
-        *
-        * @version 1.0
         */
         getCookie: function (c_name) {
             if (document.cookie.length > 0) {
@@ -215,8 +205,6 @@
         * Determine if localStorage is supported by current browser.
         *
         * @return {Boolearn} true - localStorage is supported. false - localStorage is not supported.
-        *
-        * @version 1.0
         */
         localStorageSupported: function () {
             try {
@@ -230,10 +218,9 @@
 
         /**
         * Clear cookies of current browser.
-        *
-        * @version 1.0
         */
         clearCookies: function () {
+            var self = this;
             var strCookie = document.cookie;
 
             // Split cookies.
@@ -244,7 +231,7 @@
             for (var i = 0; i < arrCookie.length; i++) {
                 arr = arrCookie[i].split("=");
                 if (arr.length > 0)
-                    HeapUtility.delCookie(arr[0]);
+                    self.delCookie(arr[0]);
             }
         },
 
@@ -252,14 +239,28 @@
         * Remove specific item in the cookies.
         * 
         * @param {String} c_name - the key of the item to remove.
-        *
-        * @version 1.0
         */
         delCookie: function (c_name) {
+            var self = this;
             var exp = new Date();
             exp.setTime(exp.getTime() - 1);
-            var cval = HeapUtility.getCookie(c_name);
+
+            var cval = self.getCookie(c_name);
             document.cookie = c_name + "=" + cval + "; expires=" + exp.toGMTString();
+        },
+
+
+        /**
+        * Decompress base64 string.
+        * 
+        * @dependency jxcompressor.js
+        * 
+        * @param {String} base64String - a base64 string to decompress.
+        */
+        decompressBase64: function (base64String) {
+            var decodedString = JXG.decompress(base64String);
+
+            return decodedString;
         }
     };
 })();

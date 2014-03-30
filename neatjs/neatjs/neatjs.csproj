@@ -57,9 +57,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="src\jsxcompressor.js" />
     <Content Include="src\neat.js" />
     <Content Include="tests\functional\newGuid.html" />
-    <Content Include="tests\unit\newGuid.html" />
+    <Content Include="tests\unit\tests.html" />
     <Content Include="tests\unit\qunit.css" />
     <Content Include="tests\unit\qunit.js" />
     <Content Include="Web.config" />
