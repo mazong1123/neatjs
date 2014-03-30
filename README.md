@@ -7,7 +7,7 @@ Installation
 =======
 
 Just add the refernce in your HTML file:<br/>
-<script src="neat.js"></script>
+&lt;script src="neat.js"&gt;&lt;/script&gt;
 
 Example
 =======
