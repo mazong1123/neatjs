@@ -5,7 +5,7 @@
     Blog: http://mazong1123.wordpress.com
     Github: https://github.com/mazong1123/neatjs
 
-    This software is under MIT licence.
+    This software is under MIT license.
 */
 
 var neat = null;
