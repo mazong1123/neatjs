@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>neat.newGuid() Unit Test</title>
+    <link rel="stylesheet" href="qunit.css" />
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../../src/neat.js"></script>
+    <script src="qunit.js"></script>
+    <script>
+        (function () {
+            test('GUID length test.', function () {
+                // Prepare
+                var expected = 36;
+
+                // Act
+                var newGuid = neat.newGuid();
+                var actual = newGuid.length;
+
+                // Assert
+                equal(actual, expected);
+            });
+        })();
+    </script>
+</body>
+</html>
